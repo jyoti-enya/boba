@@ -167,14 +167,16 @@ jobs:
           patterns: go/proxyd
       - run:
           name: Lint
-          command: golangci-lint run -E goimports,sqlclosecheck,bodyclose,asciicheck,misspell,errorlint -e "errors.As" -e "errors.Is" ./...
+          command: |
+            mkdir -p /tmp/test-results
+            golangci-lint run -E goimports,sqlclosecheck,bodyclose,asciicheck,misspell,errorlint -e "errors.As" -e "errors.Is" ./...
           working_directory: <<parameters.working_directory>>
       - store_test_results:
           path: /tmp/test-results
       - run:
           name: Test
           command: |
-            mkdir -p /tmp/test-results
+            #mkdir -p /tmp/test-results
             DB_USER=postgres gotestsum --junitfile /tmp/test-results/tests.xml
           working_directory: <<parameters.working_directory>>
       - when:
