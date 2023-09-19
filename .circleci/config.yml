@@ -170,12 +170,12 @@ jobs:
           command: golangci-lint run -E goimports,sqlclosecheck,bodyclose,asciicheck,misspell,errorlint -e "errors.As" -e "errors.Is" ./...
           working_directory: <<parameters.working_directory>>
       - store_test_results:
-          path: /test-results
+          path: /tmp/test-results
       - run:
           name: Test
           command: |
-            mkdir -p /test-results
-            DB_USER=postgres gotestsum --junitfile /test-results/tests.xml
+            mkdir -p /tmp/test-results
+            DB_USER=postgres gotestsum --junitfile /tmp/test-results/tests.xml
           working_directory: <<parameters.working_directory>>
       - when:
           condition:
