@@ -217,7 +217,8 @@ jobs:
           docker_compose_file: "docker-compose-bnb.yml"
           docker_compose_side_file: "docker-compose-bnb-side.yml"
           test_folder: "alt-l2"
-      - report-integration-tests
+      - report-integration-tests 
+      
 
 workflows:
   main:
